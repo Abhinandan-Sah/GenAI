@@ -5,6 +5,25 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+const chattingHistory = {};
+
+// const chattingHistory = {
+// 1: [{role: "user", parts: {text: "hello, How are you?"}}, {role: "model", parts: {text: "I am fine, thank you!"}}, {role: "user", parts: {text: "What is your name?"}}, {role: "model", parts: {text: "I am a chatbot created by OpenAI."}}],
+// 2: [{role: "user", parts: {text: "What is the weather like today?"}}, {role: "model", parts: {text: "I am not sure, but you can check a weather website."}}],
+// 3: [{role: "user", parts: {text: "What is the capital of France?"}}, {role: "model", parts: {text: "The capital of France is Paris."}}],
+// 4: [],
+// 5: [],
+// };
+
+// We will store the chatbot history Here
+// key: value pair
+// key = id
+// value = array
+
+app.post('/chat/history', (req, res)=>{
+    const {id, message} = req.body;
+    
+})
 
 
 app.post('/chat', async(req, res)=>{
