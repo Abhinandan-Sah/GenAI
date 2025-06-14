@@ -20,10 +20,24 @@ const chattingHistory = {};
 // key = id
 // value = array
 
-app.post('/chat/history', (req, res)=>{
+app.post('/chat/history', async(req, res)=>{
     const {id, message} = req.body;
-    
-})
+
+    if (!id || !message) {
+        return res.status(400).json({ error: "ID and message are required" });
+    }
+
+    if(!chattingHistory[id]){
+      chattingHistory = [];
+    }
+
+    const History = chattingHistory[id];
+    const promptRespond = await main(history);
+    console.log(promptRespond);
+    History.push({role: "user", parts: {text: message}});
+    History.push({role: "model", parts: {text: promptRespond}});
+
+});
 
 
 app.post('/chat', async(req, res)=>{
