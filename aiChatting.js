@@ -4,11 +4,17 @@ import 'dotenv/config'
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GENAI_API_KEY });
 
 async function main(msg) {
-  const response = await ai.models.generateContent({
+  try{
+    const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",
     contents: msg || "Hello, how are you?",
   });
   return response.text;
+  }
+  catch(err){
+    console.error("Error generating content:", err);
+  }
+  
 }
 
 main();
