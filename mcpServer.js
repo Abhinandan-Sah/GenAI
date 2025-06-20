@@ -17,5 +17,11 @@ async function mcpServer(msg) {
 }
 mcpServer();
 
+async function getWeather (){
+  const data = await("");
+  const jsonData = await data.json();
+  return jsonData;
+}
+
 export default mcpServer;
 
