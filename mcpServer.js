@@ -20,6 +20,9 @@ mcpServer();
 async function getWeather (){
   const data = await("");
   const jsonData = await data.json();
+  if (!jsonData || !jsonData.weather) {
+    throw new Error("Weather data not available");
+  }
   return jsonData;
 }
 
