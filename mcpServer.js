@@ -18,12 +18,25 @@ async function mcpServer(msg) {
 mcpServer();
 
 async function getWeather (){
-  const data = await("");
-  const jsonData = await data.json();
-  if (!jsonData || !jsonData.weather) {
-    throw new Error("Weather data not available");
+  // const data = await("");
+  // const jsonData = await data.json();
+  // if (!jsonData || !jsonData.weather) {
+  //   throw new Error("Weather data not available");
+  // }
+  // return jsonData;
+  for(const {city, date} of location){
+    const respone = await fetch("https://api.weatherapi.com/v1/forecast.json?key=YOUR_API_KEY&q=" + city )
+    const data = await respone.json();
+    if (!data || !data.current) {
+      throw new Error("Weather data not available");
+    }   
+    return {
+      city: city,
+      date: date,
+      temperature: data.current.temp_c,
+      condition: data.current.condition.text
+    };
   }
-  return jsonData;
 }
 
 export default mcpServer;
